@@ -3,6 +3,7 @@ import './App.css'
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [itemName, setItemName] = useState("");
 
   return (
     <>
@@ -13,7 +14,32 @@ function App() {
         </button>
       </div>
 
-      {isModalOpen && <div className="modal-overlay" onClick={() => setIsModalOpen(false)}></div>}
+      {isModalOpen && ( 
+        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+          <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-box-top">
+              <h2 className='modal-box-title'>New Item</h2>
+              <button className="modal-box-close" onClick={() => setIsModalOpen(false)}>X</button>
+            </div>
+
+            <label htmlFor="item-name">Item name</label>
+            <input 
+              id="item-name" 
+              type="text" 
+              placeholder="Enter task name"
+              value={itemName}
+              onChange={(e) => setItemName(e.target.value)}
+            />
+
+            <p>{itemName}</p>
+
+            <div className="modal-box-bottom">
+              <button className="modal-box-cancel" onClick={() => setIsModalOpen(false)}>Cancel</button>
+              <button className="modal-box-save">Save</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="list">
       </div>
